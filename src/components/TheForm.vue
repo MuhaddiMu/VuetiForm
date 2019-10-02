@@ -1,11 +1,22 @@
 <template>
-  <v-container>
-    <v-layout text-center wrap></v-layout>
-  </v-container>
+  <v-layout text-center wrap>
+    <v-flex col-md-6>
+      <TheFormData />
+    </v-flex>
+    <v-flex col-md-6>
+      <TheFormResult />
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
+import TheFormData from './TheFormData'
+import TheFormResult from './TheFormResult'
 export default {
+  components: {
+    TheFormData,
+    TheFormResult
+  },
   data: () => ({
 
   }),
