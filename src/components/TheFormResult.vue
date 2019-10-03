@@ -71,12 +71,11 @@ export default {
         }
       }
 
-      if (Field.Rules == 'Email') {
+      if (Field.Rules == "Email") {
         return [
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ]
       }
-
 
     }
   },
