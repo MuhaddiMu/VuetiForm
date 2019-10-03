@@ -1,5 +1,5 @@
 <template>
-  <v-layout text-center wrap>
+  <v-layout wrap>
     <v-flex col-md-6>
       <TheFormData />
     </v-flex>
