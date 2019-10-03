@@ -6,9 +6,9 @@
       <v-tab>Form</v-tab>
     </v-tabs>
     <v-container>
-      <v-row v-for="(Field, index) in Fields" :key="index">
+      <v-row align="center" justify="center" v-for="(Field, index) in Fields" :key="index">
         <v-col cols="12" md="3">
-          <v-text-field label="Label" required></v-text-field>
+          <v-text-field label="Label" v-model="Field.Label" required></v-text-field>
         </v-col>
 
         <v-col cols="12" md="3">
@@ -20,17 +20,17 @@
         </v-col>
 
         <v-col cols="12" md="3">
-          <v-switch v-model="FiledRequired" label="Required"></v-switch>
+          <v-switch v-model="Field.FiledRequired" label="Required"></v-switch>
         </v-col>
 
-        <v-col cols="12" md="3">
+        <v-col class="mt-4" cols="12" md="3">
           <v-slider
+            label="Max"
             :thumb-size="24"
             :max="100"
-            thumb-label="always"
+            thumb-label
             :min="0"
-            v-model="Counter"
-            label="Max"
+            v-model="Field.Counter"
           ></v-slider>
         </v-col>
       </v-row>
@@ -43,14 +43,12 @@
 <script>
 export default {
   data: () => ({
-    Counter: 0,
-    FiledRequired: false,
     Fields: [
     ]
   }),
   methods: {
     NewField() {
-      this.Fields.push({})
+      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25' })
     }
   }
 };
