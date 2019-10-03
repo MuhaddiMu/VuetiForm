@@ -13,6 +13,7 @@
 
         <v-col cols="12" md="3">
           <v-select
+            v-model="Field.Rules"
             :menu-props="{ top: true, offsetY: true }"
             :items="['Name', 'Email', 'Password']"
             label="Rules"
@@ -48,8 +49,11 @@ export default {
   }),
   methods: {
     NewField() {
-      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25' })
+      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25', Rules: '' })
     }
+  },
+  updated() {
+    this.$root.$emit('eventing', this.Fields);
   }
 };
 </script>
