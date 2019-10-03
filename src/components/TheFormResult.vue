@@ -7,6 +7,7 @@
         <v-flex v-for="(Field, index) in Fields" :key="index">
           <v-text-field
             v-if="Field.Type === 'TextField'"
+            v-model="Field.DefaultValue"
             :label="Field.Label"
             :min="0"
             :counter="Field.Counter"
@@ -63,9 +64,11 @@ export default {
       }
 
       if (Field.Counter > 0) {
-        return [
-          v => v.length <= Field.Counter || 'Max ' + Field.Counter + ' characters',
-        ]
+        if (Field.DefaultValue) {
+          return [
+            v => v.length <= Field.Counter || 'Max ' + Field.Counter + ' characters',
+          ]
+        }
       }
 
       if (Field.Rules == 'Email') {

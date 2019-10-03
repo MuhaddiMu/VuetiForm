@@ -49,7 +49,7 @@ export default {
   }),
   methods: {
     NewField() {
-      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25', Rules: '' })
+      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25', Rules: '', DefaultVal: '' })
     }
   },
   updated() {
