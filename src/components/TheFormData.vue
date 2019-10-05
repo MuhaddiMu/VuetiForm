@@ -15,7 +15,7 @@
           <v-select
             v-model="Field.Rules"
             :menu-props="{ top: true, offsetY: true }"
-            :items="['Name', 'Email', 'Password']"
+            :items="['Text', 'Number', 'Email', 'Password']"
             label="Rules"
           ></v-select>
         </v-col>
@@ -49,7 +49,7 @@ export default {
   }),
   methods: {
     NewField() {
-      this.Fields.push({ Type: "TextField", Label: "", FiledRequired: false, Counter: '25', Rules: '', DefaultVal: '' })
+      this.Fields.push({ Type: "TextField", Label: "", TogglePassword: false, FiledRequired: false, Counter: '25', Rules: '', DefaultVal: '' })
     }
   },
   updated() {
