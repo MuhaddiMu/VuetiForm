@@ -49,12 +49,15 @@ export default {
         this.snackbar = true
       }
     },
+
     Reset() {
       this.$refs.Form.reset()
     },
+
     ResetValidation() {
       this.$refs.Form.resetValidation()
     },
+
     Rules(Field) {
 
       var RulesArray = []
@@ -70,9 +73,7 @@ export default {
       }
 
       if (Field.Rules == "Email") {
-
         RulesArray.push(v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail must be valid')
-        console.log(RulesArray)
       }
 
       return RulesArray
