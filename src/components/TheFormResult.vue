@@ -57,25 +57,25 @@ export default {
     },
     Rules(Field) {
 
+      var RulesArray = []
+
       if (Field.FiledRequired) {
-        return [
-          v => !!v || Field.Label + ' is required',
-        ]
+        RulesArray.push(v => !!v || Field.Label + ' is required')
       }
 
       if (Field.Counter > 0) {
         if (Field.DefaultValue) {
-          return [
-            v => v.length <= Field.Counter || 'Max ' + Field.Counter + ' characters',
-          ]
+          RulesArray.push(v => v.length <= Field.Counter || 'Max ' + Field.Counter + ' characters')
         }
       }
 
       if (Field.Rules == "Email") {
-        return [
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-        ]
+
+        RulesArray.push(v => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail must be valid')
+        console.log(RulesArray)
       }
+
+      return RulesArray
 
     }
   },
