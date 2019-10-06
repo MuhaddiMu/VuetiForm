@@ -10,15 +10,13 @@
 </template>
 
 <script>
-import TheFormData from './TheFormData'
-import TheFormResult from './TheFormResult'
+import TheFormData from "./TheFormData"
+import TheFormResult from "./TheFormResult"
 export default {
   components: {
     TheFormData,
     TheFormResult
   },
-  data: () => ({
-
-  }),
-};
+  data: () => ({})
+}
 </script>
