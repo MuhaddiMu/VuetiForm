@@ -41,7 +41,7 @@
         </v-flex>
 
         <v-btn
-          v-if="Fields"
+          v-if="Fields.length > 0"
           :disabled="!Valid"
           color="success"
           class="mr-4"
@@ -49,10 +49,14 @@
           >Validate</v-btn
         >
 
-        <v-btn v-if="Fields" color="error" class="mr-4" @click="Reset"
+        <v-btn
+          v-if="Fields.length > 0"
+          color="error"
+          class="mr-4"
+          @click="Reset"
           >Reset Form</v-btn
         >
-        <v-btn v-if="Fields" color="warning" @click="ResetValidation"
+        <v-btn v-if="Fields.length > 0" color="warning" @click="ResetValidation"
           >Reset Validation</v-btn
         >
       </v-container>
@@ -70,8 +74,7 @@
 export default {
   data: () => ({
     Valid: true,
-    Fields: null,
-    Textareas: null
+    Fields: []
   }),
 
   methods: {

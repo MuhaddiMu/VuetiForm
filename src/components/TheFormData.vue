@@ -3,7 +3,7 @@
     <v-tabs>
       <v-tab @click="TabToggle = 'TextField'">Text Fields</v-tab>
       <v-tab @click="TabToggle = 'Textarea'">Textarea</v-tab>
-      <v-tab>Form</v-tab>
+      <v-tab @click="TabToggle = 'FormSettings'">Form</v-tab>
     </v-tabs>
     <v-container>
       <div v-if="TabToggle == 'TextField'">
