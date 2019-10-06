@@ -74,7 +74,7 @@
         </v-container>
       </v-form>
       <v-card-actions>
-        <v-btn @click="Dialog = true" text>
+        <v-btn v-if="Fields.length > 0" @click="GiveMeCode" text>
           Give Me Code
           <v-icon>mdi-code-tags-check</v-icon>
         </v-btn>
@@ -94,7 +94,7 @@
         >
 
         <v-card-text>
-          <PrismEditor readonly :code="code" language="vue"></PrismEditor>
+          <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
         </v-card-text>
 
         <v-card-actions>
@@ -117,7 +117,7 @@ export default {
   },
 
   data: () => ({
-    code: ``,
+    SourceCode: ``,
     Dialog: false,
     Valid: true,
     Fields: [],
@@ -172,6 +172,22 @@ export default {
       }
 
       return RulesArray
+    },
+    GiveMeCode() {
+      this.Dialog = true
+      this.SourceCode =
+        `<template>
+     <v-form ref="Form">
+         <v-container class="text-center">` +
+        this.Fields.map(function(Field) {
+          return [
+            '<v-text-field label="' + Field.Label + '"' + "></v-text-field>"
+          ]
+        }) +
+        `</v-container>
+     </v-form>
+ </template>
+`
     }
   },
 
