@@ -80,7 +80,7 @@
               <v-select
                 v-model="Field.Rules"
                 :menu-props="{ top: true, offsetY: true }"
-                :items="['Deafult', 'Solo', 'Filled', 'Outlined']"
+                :items="['Regular', 'Solo', 'Filled', 'Outlined']"
                 label="Type"
               ></v-select>
             </v-col>
@@ -113,6 +113,34 @@
           >
         </v-flex>
       </div>
+
+      <div v-if="TabToggle == 'FormSettings'">
+        <v-row align="center" justify="center">
+          <v-flex row>
+            <v-col cols="4">
+              <v-subheader>Input Field Style</v-subheader>
+            </v-col>
+            <v-col cols="6">
+              <v-select
+                outlined=""
+                v-model="FormSettings.InputStyle"
+                :menu-props="{ top: true, offsetY: true }"
+                :items="['Regular', 'Solo', 'Filled', 'Outlined']"
+                label="Type"
+              ></v-select>
+            </v-col>
+          </v-flex>
+
+          <v-flex row>
+            <v-col cols="4">
+              <v-subheader>Input Field Dense</v-subheader>
+            </v-col>
+            <v-col cols="6">
+              <v-switch v-model="FormSettings.Dense" label="Dense"></v-switch>
+            </v-col>
+          </v-flex>
+        </v-row>
+      </div>
     </v-container>
   </v-card>
 </template>
@@ -121,7 +149,8 @@
 export default {
   data: () => ({
     TabToggle: "TextField",
-    Fields: []
+    Fields: [],
+    FormSettings: { InputStyle: "", Dense: false }
   }),
   methods: {
     NewField() {
@@ -149,6 +178,7 @@ export default {
   },
   updated() {
     this.$root.$emit("TextField", this.Fields)
+    this.$root.$emit("FormSettings", this.FormSettings)
   }
 }
 </script>

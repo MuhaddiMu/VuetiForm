@@ -6,6 +6,10 @@
       <v-container class="text-center">
         <v-flex v-for="(Field, index) in Fields" :key="index">
           <v-text-field
+            :dense="FormSettings.Dense === true"
+            :filled="FormSettings.InputStyle === 'Filled' ? true : false"
+            :outlined="FormSettings.InputStyle === 'Outlined' ? true : false"
+            :solo="FormSettings.InputStyle === 'Solo' ? true : false"
             v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'"
             v-model="Field.DefaultVal"
             :label="Field.Label"
@@ -16,6 +20,10 @@
           ></v-text-field>
 
           <v-text-field
+            :dense="FormSettings.Dense === true"
+            :filled="FormSettings.InputStyle === 'Filled' ? true : false"
+            :outlined="FormSettings.InputStyle === 'Outlined' ? true : false"
+            :solo="FormSettings.InputStyle === 'Solo' ? true : false"
             v-model="Field.DefaultVal"
             v-if="Field.Rules === 'Password'"
             :append-icon="Field.TogglePassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -31,8 +39,8 @@
             v-if="Field.Type == 'Textarea'"
             :filled="Field.Rules === 'Filled' ? true : false"
             :outlined="Field.Rules === 'Outlined' ? true : false"
-            :min="0"
             :solo="Field.Rules === 'Solo' ? true : false"
+            :min="0"
             :label="Field.Label"
             :counter="Field.Counter"
             :value="Field.DefaultVal"
@@ -74,7 +82,8 @@
 export default {
   data: () => ({
     Valid: true,
-    Fields: []
+    Fields: [],
+    FormSettings: null
   }),
 
   methods: {
@@ -131,6 +140,10 @@ export default {
   mounted() {
     this.$root.$on("TextField", data => {
       this.Fields = data
+    })
+
+    this.$root.$on("FormSettings", data => {
+      this.FormSettings = data
     })
   }
 }
