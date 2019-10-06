@@ -95,11 +95,6 @@
 
         <v-card-text>
           <PrismEditor readonly :code="code" language="vue"></PrismEditor>
-
-          <!-- Code Block -->
-          <!-- <highlight-code lang="vue">
-    
-          </highlight-code> -->
         </v-card-text>
 
         <v-card-actions>
