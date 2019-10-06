@@ -83,7 +83,14 @@
     <v-dialog v-model="Dialog" max-width="700">
       <v-card shaped>
         <v-card-title class="headline"
-          >VuetiForm <a href="https://github.com/MuhaddiMu/VuetiForm" target="_blank" rel="noopener noreferrer" ><v-icon>mdi-github-circle</v-icon></v-card-title
+          >VuetiForm
+          <v-btn
+            icon
+            href="https://github.com/MuhaddiMu/VuetiForm"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><v-icon>mdi-github-circle</v-icon></v-btn
+          ></v-card-title
         >
 
         <v-card-text> </v-card-text>
