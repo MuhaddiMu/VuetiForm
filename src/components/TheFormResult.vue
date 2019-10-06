@@ -94,6 +94,8 @@
         >
 
         <v-card-text>
+          <PrismEditor readonly :code="code" language="vue"></PrismEditor>
+
           <!-- Code Block -->
           <!-- <highlight-code lang="vue">
     
@@ -113,8 +115,14 @@
 </template>
 
 <script>
+import PrismEditor from "vue-prism-editor"
 export default {
+  components: {
+    PrismEditor
+  },
+
   data: () => ({
+    code: ``,
     Dialog: false,
     Valid: true,
     Fields: [],
