@@ -51,7 +51,13 @@
           </v-flex>
         </v-row>
 
-        <v-btn @click="NewField" text>New Text Field</v-btn>
+        <v-flex row>
+          <v-btn @click="NewField" text>New Text Field</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn v-if="Fields.length > 0" @click="Fields = []" text
+            >Reset Fields <v-icon>mdi-refresh</v-icon></v-btn
+          >
+        </v-flex>
       </div>
 
       <div v-if="TabToggle == 'Textarea'">
@@ -98,7 +104,14 @@
             </v-col>
           </v-flex>
         </v-row>
-        <v-btn @click="NewTextArea" text>New Textarea Field</v-btn>
+
+        <v-flex row>
+          <v-btn @click="NewTextArea" text>New Textarea Field</v-btn>
+          <v-spacer></v-spacer>
+          <v-btn v-if="Fields.length > 0" @click="Fields = []" text
+            >Reset Fields <v-icon>mdi-refresh</v-icon></v-btn
+          >
+        </v-flex>
       </div>
     </v-container>
   </v-card>
@@ -108,8 +121,7 @@
 export default {
   data: () => ({
     TabToggle: "TextField",
-    Fields: [],
-    Textarea: []
+    Fields: []
   }),
   methods: {
     NewField() {
