@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "highlight.js": "^9.15.10",
     "vue": "^2.6.10",
+    "vue-highlight.js": "^3.1.0",
     "vuetify": "^2.0.0"
   },
   "devDependencies": {
