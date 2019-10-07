@@ -7,11 +7,11 @@
         <v-container class="text-center">
           <v-flex v-for="(Field, index) in Fields" :key="index">
             <v-text-field
+              v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'"
               :dense="FormSettings.Dense === true"
               :filled="FormSettings.InputStyle === 'Filled' ? true : false"
               :outlined="FormSettings.InputStyle === 'Outlined' ? true : false"
               :solo="FormSettings.InputStyle === 'Solo' ? true : false"
-              v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'"
               v-model="Field.DefaultVal"
               :label="Field.Label"
               :type="Field.Rules"
@@ -21,12 +21,12 @@
             ></v-text-field>
 
             <v-text-field
+              v-if="Field.Type === 'TextField' && Field.Rules === 'Password'"
               :dense="FormSettings.Dense === true"
               :filled="FormSettings.InputStyle === 'Filled' ? true : false"
               :outlined="FormSettings.InputStyle === 'Outlined' ? true : false"
               :solo="FormSettings.InputStyle === 'Solo' ? true : false"
               v-model="Field.DefaultVal"
-              v-if="Field.Rules === 'Password'"
               :append-icon="Field.TogglePassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="Field.TogglePassword ? 'text' : 'password'"
               :label="Field.Label"
@@ -97,8 +97,8 @@
           <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
 <pre class="CodeBackground">&lt;template&gt;
     &lt;v-form ref=&quot;Form&quot;&gt; 
-        &lt;v-container class=&quot;text-center&quot;&gt;<span v-for="(Field, index) in Fields" :key="index">
-            {{Field.Type === 'TextField' ? "&lt;v-text-field " : null}}
+        &lt;v-container class=&quot;text-center&quot;&gt;<span v-for="(Field, index) in Fields" :key="index"> 
+          <span v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
               {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
               label="{{Field.Label}}"
@@ -106,8 +106,22 @@
               :min="0"
               :counter="{{Field.Counter}}"
               v-model"Field_{{index+1}}"
-              :rules="Rules{{index+1}}"
-        &gt;&lt;/v-text-field&gt;</span>
+              :rules="Rule_{{index+1}}"
+          &gt;&lt;/v-text-field&gt;</span></span>
+        <span v-for="(Field, IndexPassword) in Fields" :key="IndexPassword+'Pass'">
+          <span v-if="Field.Type === 'TextField' && Field.Rules === 'Password'">&lt;v-text-field
+              {{FormSettings.Dense === true ? 'dense' : null}}
+              {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
+              label="{{Field.Label}}"
+              hint="At least 8 characters"
+              :append-icon="TogglePass_{{IndexPassword+1}} ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="TogglePass_{{IndexPassword+1}} ? 'text' : 'password'"
+              :min="0"
+              :counter="{{Field.Counter}}"
+              v-model"Field_{{IndexPassword+1}}"
+              :rules="Rule_{{IndexPassword+1}}"
+              @click:append"{{IndexPassword+1}} = !{{IndexPassword+1}}"
+          &gt;&lt;/v-text-field&gt;</span></span>
         &lt;/v-container&gt;
     &lt;/v-form&gt;
 &lt;/template&gt;
@@ -115,8 +129,8 @@
   export default { 
     data: () =&gt; ({
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
-      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{Field.Counter > 0 ? 'v => v.length <= '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters",' : null }} {{Field.Rules === 'Email' ? `v => /^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/.test(v) || "Email must be valid",` : null}} ] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
-    }) }}
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{Field.Counter > 0 ? 'v => v.length   '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters",' : null }} {{Field.Rules === 'Email' ? `v => /^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/.test(v) || "Email must be valid",` : null}} {{Field.Rules === 'Password' ? 'v => v.length >= 8 || "Min 8 characters"' : null }} ] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
+    })
 &lt;/script&gt;</pre></v-card-text>
 
         <v-card-actions>
