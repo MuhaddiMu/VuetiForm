@@ -106,6 +106,7 @@
               :min="0"
               :counter="{{Field.Counter}}"
               v-model"Field_{{index+1}}"
+              :rules="Rules{{index+1}}"
         &gt;&lt;/v-text-field&gt;</span>
         &lt;/v-container&gt;
     &lt;/v-form&gt;
@@ -113,7 +114,8 @@
 &lt;script&gt;
   export default { 
     data: () =&gt; ({
-      <span v-for="(Field, IndexScript) in Fields" :key="IndexScript + '1'">Field_{{IndexScript+1}}: ''{{IndexScript !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
+      <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: []{{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
     }) 
 &lt;/script&gt;</pre></v-card-text>
 
