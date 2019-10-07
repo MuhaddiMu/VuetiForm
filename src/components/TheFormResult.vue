@@ -94,7 +94,14 @@
         >
 
         <v-card-text>
-          <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
+          <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
+          <pre>&lt;template&gt;
+    &lt;v-form ref=&quot;Form&quot;&gt; 
+        &lt;v-container class=&quot;text-center&quot;&gt;<span v-for="(Field, index) in Fields" :key="index">
+            xD</span>
+        &lt;/v-container&gt;
+    &lt;/v-form&gt;
+&lt;/template&gt;</pre>
         </v-card-text>
 
         <v-card-actions>
@@ -178,13 +185,15 @@ export default {
       this.SourceCode =
         `<template>
      <v-form ref="Form">
-         <v-container class="text-center">` +
+         <v-container class="text-center">
+         ` +
         this.Fields.map(function(Field) {
           return [
-            '<v-text-field label="' + Field.Label + '"' + "></v-text-field>"
+            '    <v-text-field label="' + Field.Label + '"' + "></v-text-field>"
           ]
         }) +
-        `</v-container>
+        `
+        </v-container>
      </v-form>
  </template>
 `
