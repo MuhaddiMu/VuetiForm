@@ -95,14 +95,27 @@
 
         <v-card-text>
           <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
-          <pre>&lt;template&gt;
+<pre class="CodeBackground">&lt;template&gt;
     &lt;v-form ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;<span v-for="(Field, index) in Fields" :key="index">
-            xD</span>
+            {{Field.Type === 'TextField' ? "&lt;v-text-field " : null}}
+              {{FormSettings.Dense === true ? 'dense' : null}}
+              {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
+              label="{{Field.Label}}"
+              {{Field.Rules && 'type="'+Field.Rules+'"'}}
+              :min="0"
+              :counter="{{Field.Counter}}"
+              v-model"Field_{{index+1}}"
+        &gt;&lt;/v-text-field&gt;</span>
         &lt;/v-container&gt;
     &lt;/v-form&gt;
-&lt;/template&gt;</pre>
-        </v-card-text>
+&lt;/template&gt;
+&lt;script&gt;
+  export default { 
+    data: () =&gt; ({
+      <span v-for="(Field, IndexScript) in Fields" :key="IndexScript + '1'">Field_{{IndexScript+1}}: ''{{IndexScript !== Fields[Fields.length - 1] ? ',' : null }}</span>
+    }) 
+&lt;/script&gt;</pre></v-card-text>
 
         <v-card-actions>
           <div class="flex-grow-1"></div>
@@ -211,3 +224,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.CodeBackground {
+  padding: 5px;
+  background-color: #282c33;
+  border-radius: 5px
+}
+
+</style>
