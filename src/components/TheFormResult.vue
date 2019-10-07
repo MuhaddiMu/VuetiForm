@@ -115,7 +115,7 @@
   export default { 
     data: () =&gt; ({
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
-      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rules_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{}} ] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{Field.Counter > 0 ? 'v => v.length <= '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters"' : null }} ] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
     }) }}
 &lt;/script&gt;</pre></v-card-text>
 
