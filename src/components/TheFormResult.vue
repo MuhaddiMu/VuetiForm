@@ -115,8 +115,8 @@
   export default { 
     data: () =&gt; ({
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
-      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: []{{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
-    }) 
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{CodeSyntaxRules(Field, RulesIndex, Field.Label)}}] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
+    }) }}
 &lt;/script&gt;</pre></v-card-text>
 
         <v-card-actions>
@@ -162,7 +162,7 @@ export default {
     },
 
     Rules(Field) {
-      var RulesArray = []
+      let RulesArray = []
 
       if (Field.FiledRequired) {
         RulesArray.push(v => !!v || Field.Label + " is required")
@@ -192,9 +192,27 @@ export default {
           RulesArray.push(v => v.length >= 8 || "Min 8 characters")
         }
       }
-
-      return RulesArray
+        return RulesArray
     },
+
+    CodeSyntaxRules(Field, Index, Label){
+      let RulesArray = []
+
+      if(Field.FiledRequired){
+        RulesArray.push('v => !!v || "Field is required"')
+      }
+
+      if (Field.Counter > 0) {
+        RulesArray.push(
+          v =>
+          v.length <= Field.Counter ||
+          "Max " + Field.Counter.toString() + " characters"
+        )
+      }
+
+      return RulesArray.toString()
+    },
+
     GiveMeCode() {
       this.Dialog = true
       this.SourceCode =
@@ -231,6 +249,8 @@ export default {
 .CodeBackground {
   padding: 5px;
   background-color: #282c33;
+  max-width: 650px;
+  overflow: auto;
   border-radius: 5px
 }
 
