@@ -113,7 +113,7 @@
 &lt;script&gt;
   export default { 
     data: () =&gt; ({
-      <span v-for="(Field, IndexScript) in Fields" :key="IndexScript + '1'">Field_{{IndexScript+1}}: ''{{IndexScript !== Fields[Fields.length - 1] ? ',' : null }}</span>
+      <span v-for="(Field, IndexScript) in Fields" :key="IndexScript + '1'">Field_{{IndexScript+1}}: ''{{IndexScript !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
     }) 
 &lt;/script&gt;</pre></v-card-text>
 
