@@ -115,7 +115,7 @@
   export default { 
     data: () =&gt; ({
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
-      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{CodeSyntaxRules(Field, RulesIndex, Field.Label)}}] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rules_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{}} ] {{RulesIndex !== Fields.length -1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }} </span>
     }) }}
 &lt;/script&gt;</pre></v-card-text>
 
@@ -164,7 +164,7 @@ export default {
     Rules(Field) {
       let RulesArray = []
 
-      if (Field.FiledRequired) {
+      if (Field.FieldRequired) {
         RulesArray.push(v => !!v || Field.Label + " is required")
       }
 
@@ -198,16 +198,14 @@ export default {
     CodeSyntaxRules(Field, Index, Label){
       let RulesArray = []
 
-      if(Field.FiledRequired){
+      if(Field.FieldRequired){
         RulesArray.push('v => !!v || "Field is required"')
       }
 
       if (Field.Counter > 0) {
         RulesArray.push(
-          v =>
-          v.length <= Field.Counter ||
-          "Max " + Field.Counter.toString() + " characters"
-        )
+          `v => v.length <= Field.Counter || "Max  characters"
+        `)
       }
 
       return RulesArray.toString()

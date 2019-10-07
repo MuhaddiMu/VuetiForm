@@ -33,7 +33,7 @@
 
             <v-col cols="12" md="3">
               <v-switch
-                v-model="Field.FiledRequired"
+                v-model="Field.FieldRequired"
                 label="Required"
               ></v-switch>
             </v-col>
@@ -88,7 +88,7 @@
 
             <v-col cols="12" md="3">
               <v-switch
-                v-model="Field.FiledRequired"
+                v-model="Field.FieldRequired"
                 label="Required"
               ></v-switch>
             </v-col>
@@ -161,7 +161,7 @@ export default {
         Type: "TextField",
         Label: "",
         TogglePassword: false,
-        FiledRequired: false,
+        FieldRequired: false,
         Counter: "25",
         Rules: "",
         DefaultVal: ""
@@ -172,7 +172,7 @@ export default {
       this.Fields.push({
         Type: "Textarea",
         Label: "",
-        FiledRequired: false,
+        FieldRequired: false,
         Counter: "0",
         Rules: "",
         DefaultVal: ""
