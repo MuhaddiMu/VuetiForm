@@ -90,14 +90,16 @@
             target="_blank"
             rel="noopener noreferrer"
             ><v-icon>mdi-github-circle</v-icon></v-btn
-          ></v-card-title
-        >
+          >
+            <v-btn @click="Clipboard" class="float-right" color="success lighten-1" text>
+              Copy to Clipboard <v-icon>mdi-content-copy</v-icon>
+            </v-btn>
+          </v-card-title>
 
         <v-card-text>
           <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
-<pre class="CodeBackground">&lt;template&gt;
-    &lt;v-form ref=&quot;Form&quot;&gt; 
-        &lt;v-container class=&quot;text-center&quot;&gt;<span v-for="(Field, index) in Fields" :key="index"> 
+<pre class="CodeBackground"><span ref="CodeSyntax1">&lt;v-form ref=&quot;Form&quot;&gt; 
+        &lt;v-container class=&quot;text-center&quot;&gt;</span><span v-for="(Field, index) in Fields" :key="index"> 
           <span v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
               {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
@@ -141,14 +143,6 @@
     })
   }
 &lt;/script&gt;</pre></v-card-text>
-
-        <v-card-actions>
-          <div class="flex-grow-1"></div>
-
-          <v-btn color="green darken-1" text @click="Dialog = false">
-            Copy to Clipboard <v-icon>mdi-content-copy</v-icon>
-          </v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </div>
@@ -233,7 +227,30 @@ export default {
 
       return RulesArray.toString()
     },
+    Clipboard(){
+      let Ref1 = this.$refs.CodeSyntax1.innerHTML
+      console.log(this.DecodeHTMLEntities(Ref1))
+    },
+    DecodeHTMLEntities(text) {
+      var entities = [
+        ['amp', '&'],
+        ['apos', '\''],
+        ['#x27', '\''],
+        ['#x2F', '/'],
+        ['#39', '\''],
+        ['#47', '/'],
+        ['lt', '<'],
+        ['gt', '>'],
+        ['nbsp', ' '],
+        ['quot', '"']
+     ];
+
+      for (var i = 0, max = entities.length; i < max; ++i) 
+          text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+      return text;
+    }
   },
+
 
   mounted() {
     this.$root.$on("TextField", data => {
