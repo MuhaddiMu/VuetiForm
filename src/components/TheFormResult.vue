@@ -97,7 +97,7 @@
           </v-card-title>
 
         <v-card-text>
-          <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
+         <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
 <pre ref="REF" class="CodeBackground"><span ref="CodeSyntax1">&lt;template&gt;
     &lt;v-form ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;</span>
@@ -140,7 +140,7 @@
   export default { 
     data: () =&gt; ({
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
-      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is requi!==red",' : null}} {{Field.Counter > 0 ? 'v => v.length <= '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters",' : null }} {{Field.Rules === 'Email' ? `v => /^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/.test(v) || "Email must be valid",` : null}} {{Field.Rules === 'Password' ? 'v => v.length >= 8 || "Min 8 characters"' : null }}],{{RulesIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
+      <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{Field.Counter > 0 ? 'v => v.length <= '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters",' : null }} {{Field.Rules === 'Email' ? `v => /^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/.test(v) || "Email must be valid",` : null}} {{Field.Rules === 'Password' ? 'v => v.length >= 8 || "Min 8 characters"' : null }}],{{RulesIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
       <span v-for="(Field, PassToggleIndex) in Fields" :key="PassToggleIndex + 'PasswordProperty'"><span v-if="Field.Rules === 'Password'">TogglePass_{{PassToggleIndex+1}}: false{{PassToggleIndex  !== Fields.length - 1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span></span>
     })
   }
@@ -158,7 +158,7 @@ export default {
   },
 
   data: () => ({
-    SourceCode: ``,
+    SourceCode: '',
     Dialog: false,
     Valid: true,
     Fields: [],
@@ -230,9 +230,10 @@ export default {
       return RulesArray.toString()
     },
     Clipboard(){
-
       let Ref = this.$refs.REF.innerHTML
-
+      
+      this.SourceCode = this.DecodeHTMLEntities(Ref)
+      
       console.log(this.DecodeHTMLEntities(Ref))
 
     },
@@ -275,7 +276,8 @@ export default {
   background-color: #282c33;
   max-width: 650px;
   overflow: auto;
-  border-radius: 5px
+  border-radius: 5px;
+  display: none
 }
 
 </style>
