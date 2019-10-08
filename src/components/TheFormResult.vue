@@ -164,8 +164,8 @@ export default {
   },
 
   data: () => ({
-    Snackbar = false,
-    SnackbarMsg = "Copied to Clipboard",
+    Snackbar: false,
+    SnackbarMsg: "Copied to Clipboard",
     SourceCode: "",
     Dialog: false,
     Valid: true,
