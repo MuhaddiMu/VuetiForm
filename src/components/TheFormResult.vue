@@ -100,7 +100,7 @@
           <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
 <pre class="CodeBackground"><span ref="CodeSyntax1">&lt;v-form ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;</span><span v-for="(Field, index) in Fields" :key="index"> 
-          <span v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
+          <span ref="CodeSyntax2" v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
               {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
               label="{{Field.Label}}"
@@ -228,8 +228,18 @@ export default {
       return RulesArray.toString()
     },
     Clipboard(){
+
+      var Code = ''
+
       let Ref1 = this.$refs.CodeSyntax1.innerHTML
-      console.log(this.DecodeHTMLEntities(Ref1))
+      Code += this.DecodeHTMLEntities(Ref1)
+
+      let Ref2 = this.$refs.CodeSyntax2[0].innerHTML
+      Code += this.DecodeHTMLEntities(Ref2)
+
+
+      console.log(Code)
+
     },
     DecodeHTMLEntities(text) {
       var entities = [
