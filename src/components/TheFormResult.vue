@@ -107,20 +107,18 @@
               :counter="{{Field.Counter}}"
               v-model"Field_{{index+1}}"
               :rules="Rule_{{index+1}}"
-          &gt;&lt;/v-text-field&gt;</span></span>
-        <span v-for="(Field, IndexPassword) in Fields" :key="IndexPassword+'Pass'">
-          <span v-if="Field.Type === 'TextField' && Field.Rules === 'Password'">&lt;v-text-field
+          &gt;&lt;/v-text-field&gt;</span><span v-if="Field.Type === 'TextField' && Field.Rules === 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
               {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
               label="{{Field.Label}}"
               hint="At least 8 characters"
-              :append-icon="TogglePass_{{IndexPassword+1}} ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="TogglePass_{{IndexPassword+1}} ? 'text' : 'password'"
+              :append-icon="TogglePass_{{index+1}} ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="TogglePass_{{index+1}} ? 'text' : 'password'"
               :min="0"
               :counter="{{Field.Counter}}"
-              v-model"Field_{{IndexPassword+1}}"
-              :rules="Rule_{{IndexPassword+1}}"
-              @click:append"TogglePass_{{IndexPassword+1}} = !TogglePass_{{IndexPassword+1}}"
+              v-model"Field_{{index+1}}"
+              :rules="Rule_{{index+1}}"
+              @click:append"TogglePass_{{index+1}} = !TogglePass_{{index+1}}"
           &gt;&lt;/v-text-field&gt;</span></span>
         &lt;/v-container&gt;
     &lt;/v-form&gt;
