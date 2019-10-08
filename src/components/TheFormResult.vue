@@ -74,31 +74,13 @@
         </v-container>
       </v-form>
       <v-card-actions>
-        <v-btn v-if="Fields.length > 0" @click="Dialog = !Dialog" text>
+        <v-btn v-if="Fields.length > 0" @click="Clipboard" text>
           Give Me Code
           <v-icon>mdi-code-tags-check</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-dialog v-model="Dialog" max-width="700">
-      <v-card shaped>
-        <v-card-title class="headline"
-          >VuetiForm
-          <v-btn
-            icon
-            href="https://github.com/MuhaddiMu/VuetiForm"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><v-icon>mdi-github-circle</v-icon></v-btn
-          >
-            <v-btn @click="Clipboard" class="float-right" color="success lighten-1" text>
-              Copy to Clipboard <v-icon>mdi-content-copy</v-icon>
-            </v-btn>
-          </v-card-title>
-
-        <v-card-text>
-         <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
-<pre ref="REF" class="CodeBackground"><span ref="CodeSyntax1">&lt;template&gt;
+<pre ref="Syntax" class="CodeBackground"><span ref="CodeSyntax1">&lt;template&gt;
     &lt;v-form ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;</span>
         <span v-for="(Field, index) in Fields" :key="index"> 
@@ -144,7 +126,31 @@
       <span v-for="(Field, PassToggleIndex) in Fields" :key="PassToggleIndex + 'PasswordProperty'"><span v-if="Field.Rules === 'Password'">TogglePass_{{PassToggleIndex+1}}: false{{PassToggleIndex  !== Fields.length - 1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span></span>
     })
   }
-&lt;/script&gt;</pre></v-card-text>
+&lt;/script&gt;</pre>
+    <v-dialog v-model="Dialog" max-width="700">
+      <v-card shaped>
+        <v-card-title class="headline"
+          >VuetiForm
+          <v-btn
+            icon
+            href="https://github.com/MuhaddiMu/VuetiForm"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><v-icon>mdi-github-circle</v-icon></v-btn
+          >
+          <v-btn
+            :v-clipboard="SourceCode"
+            v-clipboard:success="Snackbar = true" 
+            class="float-right"
+            color="success lighten-1"
+            text
+          >
+            Copy to Clipboard <v-icon>mdi-content-copy</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text>
+          <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
+        </v-card-text>
       </v-card>
     </v-dialog>
   </div>
@@ -158,7 +164,9 @@ export default {
   },
 
   data: () => ({
-    SourceCode: '',
+    Snackbar = false,
+    SnackbarMsg = "Copied to Clipboard",
+    SourceCode: "",
     Dialog: false,
     Valid: true,
     Fields: [],
@@ -211,52 +219,59 @@ export default {
           RulesArray.push(v => v.length >= 8 || "Min 8 characters")
         }
       }
-        return RulesArray
+      return RulesArray
     },
 
-    CodeSyntaxRules(Field, Index, Label){
+    CodeSyntaxRules(Field, Index, Label) {
       let RulesArray = []
 
-      if(Field.FieldRequired){
+      if (Field.FieldRequired) {
         RulesArray.push('v => !!v || "Field is required"')
       }
 
       if (Field.Counter > 0) {
         RulesArray.push(
           `v => v.length <= Field.Counter || "Max  characters"
-        `)
+        `
+        )
       }
 
       return RulesArray.toString()
     },
-    Clipboard(){
-      let Ref = this.$refs.REF.innerHTML
-      
-      this.SourceCode = this.DecodeHTMLEntities(Ref)
-      
-      console.log(this.DecodeHTMLEntities(Ref))
+    Clipboard() {
+      this.Dialog = true
 
+      let Ref = this.$refs.Syntax.innerHTML
+
+      this.SourceCode = this.DecodeHTMLEntities(Ref)
+
+      console.log(this.DecodeHTMLEntities(Ref))
     },
     DecodeHTMLEntities(text) {
       var entities = [
-        ['amp', '&'],
-        ['apos', '\''],
-        ['#x27', '\''],
-        ['#x2F', '/'],
-        ['#39', '\''],
-        ['#47', '/'],
-        ['lt', '<'],
-        ['gt', '>'],
-        ['nbsp', ' '],
-        ['quot', '"']
-     ];
+        ["amp", "&"],
+        ["apos", "'"],
+        ["#x27", "'"],
+        ["#x2F", "/"],
+        ["#39", "'"],
+        ["#47", "/"],
+        ["lt", "<"],
+        ["gt", ">"],
+        ["nbsp", " "],
+        ["quot", '"']
+      ]
 
-      for (var i = 0, max = entities.length; i < max; ++i) 
-          text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
-      return text.replace(/<\/?span[^>]*>/g,"").replace(/<\!--.*?-->/g, "").replace(/^\s*[\r\n]/gm, "");
+      for (var i = 0, max = entities.length; i < max; ++i)
+        text = text.replace(
+          new RegExp("&" + entities[i][0] + ";", "g"),
+          entities[i][1]
+        )
+      return text
+        .replace(/<\/?span[^>]*>/g, "")
+        .replace(/<\!--.*?-->/g, "")
+        .replace(/^\s*[\r\n]/gm, "")
     }
   },
-
 
   mounted() {
     this.$root.$on("TextField", data => {
@@ -277,7 +292,6 @@ export default {
   max-width: 650px;
   overflow: auto;
   border-radius: 5px;
-  display: none
+  display: none;
 }
-
 </style>
