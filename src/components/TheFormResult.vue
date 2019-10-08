@@ -105,7 +105,7 @@
               {{Field.Rules && 'type="'+Field.Rules+'"'}}
               :min="0"
               :counter="{{Field.Counter}}"
-              v-model"Field_{{index+1}}"
+              v-model="Field_{{index+1}}"
               :rules="Rule_{{index+1}}"
           &gt;&lt;/v-text-field&gt;</span><span v-if="Field.Type === 'TextField' && Field.Rules === 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
@@ -116,10 +116,18 @@
               :type="TogglePass_{{index+1}} ? 'text' : 'password'"
               :min="0"
               :counter="{{Field.Counter}}"
-              v-model"Field_{{index+1}}"
+              v-model="Field_{{index+1}}"
               :rules="Rule_{{index+1}}"
               @click:append"TogglePass_{{index+1}} = !TogglePass_{{index+1}}"
-          &gt;&lt;/v-text-field&gt;</span></span>
+          &gt;&lt;/v-text-field&gt;</span>
+          <span v-if="Field.Type === 'Textarea'">&lt;v-textarea
+              {{Field.Rules === 'Filled' ? 'filled' : null}}{{Field.Rules === 'Solo' ? 'solo' : null}}{{Field.Rules === 'Outlined' ? 'outlined' : null}}
+              label="{{Field.Label}}"
+              :min="0"
+              :counter="{{Field.Counter}}"
+              :value="Field_{{index+1}}"
+              :rules="Rule_{{index+1}}"
+          &gt;&lt;/v-textarea&gt;</span></span>
         &lt;/v-container&gt;
     &lt;/v-form&gt;
 &lt;/template&gt;
