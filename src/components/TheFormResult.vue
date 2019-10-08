@@ -116,7 +116,7 @@
               :counter="{{Field.Counter}}"
               v-model="Field_{{index+1}}"
               :rules="Rule_{{index+1}}"
-              @click:append"TogglePass_{{index+1}} = !TogglePass_{{index+1}}"
+              @click:append="TogglePass_{{index+1}} = !TogglePass_{{index+1}}"
           &gt;&lt;/v-text-field&gt;</span>
           <span v-if="Field.Type === 'Textarea'">&lt;v-textarea
               {{Field.Rules === 'Filled' ? 'filled' : null}}{{Field.Rules === 'Solo' ? 'solo' : null}}{{Field.Rules === 'Outlined' ? 'outlined' : null}}
