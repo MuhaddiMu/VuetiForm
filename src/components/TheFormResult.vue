@@ -74,7 +74,7 @@
         </v-container>
       </v-form>
       <v-card-actions>
-        <v-btn v-if="Fields.length > 0" @click="GiveMeCode" text>
+        <v-btn v-if="Fields.length > 0" @click="Dialog = !Dialog" text>
           Give Me Code
           <v-icon>mdi-code-tags-check</v-icon>
         </v-btn>
@@ -233,25 +233,6 @@ export default {
 
       return RulesArray.toString()
     },
-
-    GiveMeCode() {
-      this.Dialog = true
-      this.SourceCode =
-        `<template>
-     <v-form ref="Form">
-         <v-container class="text-center">
-         ` +
-        this.Fields.map(function(Field) {
-          return [
-            '    <v-text-field label="' + Field.Label + '"' + "></v-text-field>"
-          ]
-        }) +
-        `
-        </v-container>
-     </v-form>
- </template>
-`
-    }
   },
 
   mounted() {
