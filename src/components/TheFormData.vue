@@ -107,7 +107,6 @@
         </v-row>
 
         <v-btn @click="NewTextArea" text>New Textarea Field</v-btn>
-        <v-spacer></v-spacer>
         <v-btn
           class="float-right"
           v-if="Fields.length > 0"

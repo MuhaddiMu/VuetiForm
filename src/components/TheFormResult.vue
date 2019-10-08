@@ -2,7 +2,19 @@
   <div>
     <v-card class="mx-auto">
       <v-card-title>Result 😎</v-card-title>
-
+          <v-snackbar
+            top
+            right
+            color="cyan darken-2"
+            :timeout="3000"
+            v-model="Snackbar">
+            {{ SnackbarMsg }}
+            <v-btn
+              text
+              @click="Snackbar = false">
+              Close
+            </v-btn>
+          </v-snackbar>
       <v-form ref="Form">
         <v-container class="text-center">
           <v-flex v-for="(Field, index) in Fields" :key="index">
@@ -139,8 +151,7 @@
             ><v-icon>mdi-github-circle</v-icon></v-btn
           >
           <v-btn
-            :v-clipboard="SourceCode"
-            v-clipboard:success="Snackbar = true" 
+            @click="CopyToClipboard"
             class="float-right"
             color="success lighten-1"
             text
@@ -235,7 +246,6 @@ export default {
         `
         )
       }
-
       return RulesArray.toString()
     },
     Clipboard() {
@@ -245,7 +255,6 @@ export default {
 
       this.SourceCode = this.DecodeHTMLEntities(Ref)
 
-      console.log(this.DecodeHTMLEntities(Ref))
     },
     DecodeHTMLEntities(text) {
       var entities = [
@@ -270,6 +279,10 @@ export default {
         .replace(/<\/?span[^>]*>/g, "")
         .replace(/<\!--.*?-->/g, "")
         .replace(/^\s*[\r\n]/gm, "")
+    },
+    CopyToClipboard(){
+       this.$clipboard(this.SourceCode)
+       this.Snackbar = true
     }
   },
 
