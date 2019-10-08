@@ -98,8 +98,10 @@
 
         <v-card-text>
           <!-- <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor> -->
-<pre class="CodeBackground"><span ref="CodeSyntax1">&lt;v-form ref=&quot;Form&quot;&gt; 
-        &lt;v-container class=&quot;text-center&quot;&gt;</span><span v-for="(Field, index) in Fields" :key="index"> 
+<pre ref="REF" class="CodeBackground"><span ref="CodeSyntax1">&lt;template&gt;
+    &lt;v-form ref=&quot;Form&quot;&gt; 
+        &lt;v-container class=&quot;text-center&quot;&gt;</span>
+        <span v-for="(Field, index) in Fields" :key="index"> 
           <span ref="CodeSyntax2" v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
               {{FormSettings.Dense === true ? 'dense' : null}}
               {{FormSettings.InputStyle === 'Filled' ? 'filled' : null}}{{FormSettings.InputStyle === 'Solo' ? 'solo' : null}}{{FormSettings.InputStyle === 'Outlined' ? 'outlined' : null}}
@@ -116,7 +118,7 @@
               hint="At least 8 characters"
               :append-icon="TogglePass_{{index+1}} ? 'mdi-eye' : 'mdi-eye-off'"
               :type="TogglePass_{{index+1}} ? 'text' : 'password'"
-              :min="0"
+              :min="0" 
               :counter="{{Field.Counter}}"
               v-model="Field_{{index+1}}"
               :rules="Rule_{{index+1}}"
@@ -229,16 +231,9 @@ export default {
     },
     Clipboard(){
 
-      var Code = ''
+      let Ref = this.$refs.REF.innerHTML
 
-      let Ref1 = this.$refs.CodeSyntax1.innerHTML
-      Code += this.DecodeHTMLEntities(Ref1)
-
-      let Ref2 = this.$refs.CodeSyntax2[0].innerHTML
-      Code += this.DecodeHTMLEntities(Ref2)
-
-
-      console.log(Code)
+      console.log(this.DecodeHTMLEntities(Ref))
 
     },
     DecodeHTMLEntities(text) {
@@ -257,7 +252,7 @@ export default {
 
       for (var i = 0, max = entities.length; i < max; ++i) 
           text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
-      return text;
+      return text.replace(/<\/?span[^>]*>/g,"").replace(/<\!--.*?-->/g, "").replace(/^\s*[\r\n]/gm, "");
     }
   },
 
