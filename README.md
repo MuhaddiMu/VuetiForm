@@ -18,6 +18,7 @@ Feel free to come up with a suggestions and improvements by creating a [new issu
  - [ ] Custom Regex Validation
  - [ ] Validation with Vuelidate
  - [ ] Validation with VeeValidate
+ - [ ] Configure Vuetify Loader
 
 ## About The Author 😎
 Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my favorite weapons. Make sure to check out my [GitHub](https://github.com/MuhaddiMu) I am on a journey to #365DaysOfCode. Feel free to say 👋 on Twitter [@MuhaddiMu](https://twitter.com/MuhaddiMu) and don't forget to land on [Muhaddis.Info](http://www.Muhaddis.Info)
