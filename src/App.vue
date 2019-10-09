@@ -6,6 +6,15 @@
         <span class="font-weight-light">FORM</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn icon href="https://twitter.com/intent/tweet?text=I just created an astonishing Form with Vuetify Form Generator by @MuhaddiMu. You can create yours at https://git.io/JeW0x 🎉&hashtags=Vue,Vuetify&related=MuhaddiMu" target="_blank" rel="noopener noreferrer" >
+        <v-icon>mdi-twitter</v-icon>
+      </v-btn>
+      <v-btn icon href="https://github.com/MuhaddiMu" target="_blank" rel="noopener noreferrer" >
+        <v-icon>mdi-human-greeting</v-icon>
+      </v-btn>
+      <v-btn icon href="https://github.com/MuhaddiMu/VuetiForm" target="_blank" rel="noopener noreferrer" >
+        <v-icon>mdi-github-circle</v-icon>
+      </v-btn>
       <v-btn fab text @click="ActivateLightTheme = !ActivateLightTheme">
         <v-icon :color="`${!ActivateLightTheme && 'yellow'}`" :light="true">mdi-brightness-4</v-icon>
       </v-btn>

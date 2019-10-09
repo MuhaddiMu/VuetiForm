@@ -141,7 +141,7 @@
 &lt;/script&gt;</pre>
     <v-dialog v-model="Dialog" max-width="700">
       <v-card shaped>
-        <v-card-title class="headline"
+        <v-flex pl-5 pr-2 pt-3 class="headline"
           >VuetiForm
           <v-btn
             icon
@@ -150,6 +150,9 @@
             rel="noopener noreferrer"
             ><v-icon>mdi-github-circle</v-icon></v-btn
           >
+          <v-btn icon href="https://twitter.com/intent/tweet?text=I just created an astonishing Form with Vuetify Form Generator by @MuhaddiMu. You can create yours at https://git.io/JeW0x 🎉&hashtags=Vue,Vuetify&related=MuhaddiMu" target="_blank" rel="noopener noreferrer" >
+            <v-icon>mdi-twitter</v-icon>
+          </v-btn>
           <v-btn
             @click="CopyToClipboard"
             class="float-right"
@@ -158,7 +161,7 @@
           >
             Copy to Clipboard <v-icon>mdi-content-copy</v-icon>
           </v-btn>
-        </v-card-title>
+        </v-flex>
         <v-card-text>
           <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
         </v-card-text>
