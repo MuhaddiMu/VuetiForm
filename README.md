@@ -1,4 +1,5 @@
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
   <h1 align="center">VuetiForm 🕶️</h1> 
   <p align="center">Interactive Vuetify Form Generator Component With Validaiton & Input Styling
   <br> 
@@ -26,3 +27,18 @@ Cyber Security Researcher and Full Stack Developer. Vue, AWS & Laravel are my fa
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 Copyright &copy; 2019, [Muhammad Muhaddis](https://www.Muhaddis.Info). All rights reserved.
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="http://Http://www.Muhaddis.Info"><img src="https://avatars3.githubusercontent.com/u/26611847?v=4" width="100px;" alt="Muhammad Muhaddis"/><br /><sub><b>Muhammad Muhaddis</b></sub></a><br /><a href="#infra-MuhaddiMu" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/MuhaddiMu/VuetiForm/commits?author=MuhaddiMu" title="Code">💻</a> <a href="#platform-MuhaddiMu" title="Packaging/porting to new platform">📦</a></td>
+  </tr>
+</table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
