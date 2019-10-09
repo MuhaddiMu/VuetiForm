@@ -16,6 +16,8 @@
  - [ ] Validation with Vuelidate
  - [ ] Validation with VeeValidate
  - [ ] Configure Vuetify Loader
+ - [ ] Remove Single Field
+ - [ ] Single Tab for all the field. (New Select Option for Field Type. Add Radiobox, Checkbox)
  
 ## Contributions 🙏
 Feel free to come up with a suggestions and improvements by creating a [new issue](https://github.com/MuhaddiMu/VuetiForm/issues/new) or submit a Pull Request.
