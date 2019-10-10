@@ -163,7 +163,7 @@
           </v-btn>
         </v-flex>
         <v-card-text>
-          <PrismEditor readonly :code="SourceCode" language="vue"></PrismEditor>
+          <PrismEditor class="NoBoxShadow" readonly :code="SourceCode" language="vue"></PrismEditor>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -309,5 +309,9 @@ export default {
   overflow: auto;
   border-radius: 5px;
   display: none;
+}
+
+code {
+  box-shadow: none !important;
 }
 </style>
