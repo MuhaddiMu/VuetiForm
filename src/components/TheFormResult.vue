@@ -77,12 +77,6 @@
             @click="Reset"
             >Reset Form</v-btn
           >
-          <v-btn
-            v-if="Fields.length > 0"
-            color="warning"
-            @click="ResetValidation"
-            >Reset Validation</v-btn
-          >
         </v-container>
       </v-form>
       <v-card-actions>
@@ -196,10 +190,6 @@ export default {
 
     Reset() {
       this.$refs.Form.reset()
-    },
-
-    ResetValidation() {
-      this.$refs.Form.resetValidation()
     },
 
     Rules(Field) {
