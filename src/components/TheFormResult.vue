@@ -2,19 +2,18 @@
   <div>
     <v-card class="mx-auto">
       <v-card-title>Result 😎</v-card-title>
-          <v-snackbar
-            top
-            right
-            color="cyan darken-2"
-            :timeout="3000"
-            v-model="Snackbar">
-            {{ SnackbarMsg }}
-            <v-btn
-              text
-              @click="Snackbar = false">
-              Close
-            </v-btn>
-          </v-snackbar>
+      <v-snackbar
+        top
+        right
+        color="cyan darken-2"
+        :timeout="3000"
+        v-model="Snackbar"
+      >
+        {{ SnackbarMsg }}
+        <v-btn text @click="Snackbar = false">
+          Close
+        </v-btn>
+      </v-snackbar>
       <v-form ref="Form">
         <v-container class="text-center">
           <v-flex v-for="(Field, index) in Fields" :key="index">
@@ -86,7 +85,10 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-<pre ref="Syntax" class="CodeBackground"><span ref="CodeSyntax1">&lt;template&gt;
+    <pre
+      ref="Syntax"
+      class="CodeBackground"
+    ><span ref="CodeSyntax1">&lt;template&gt;
     &lt;v-form ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;</span>
         <span v-for="(Field, index) in Fields" :key="index"> 
@@ -142,9 +144,14 @@
             href="https://github.com/MuhaddiMu/VuetiForm"
             target="_blank"
             rel="noopener noreferrer"
-            ><v-icon>mdi-github-circle</v-icon></v-btn
+            ><v-icon>mdi-github</v-icon></v-btn
           >
-          <v-btn icon href="https://twitter.com/intent/tweet?text=I just created an astonishing Form with Vuetify Form Generator by @MuhaddiMu. You can create yours at https://git.io/JeW0x 🎉&hashtags=Vue,Vuetify&related=MuhaddiMu" target="_blank" rel="noopener noreferrer" >
+          <v-btn
+            icon
+            href="https://twitter.com/intent/tweet?text=I just created an astonishing Form with Vuetify Form Generator by @MuhaddiMu. You can create yours at https://git.io/JeW0x 🎉&hashtags=Vue,Vuetify&related=MuhaddiMu"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <v-icon>mdi-twitter</v-icon>
           </v-btn>
           <v-btn
@@ -157,7 +164,12 @@
           </v-btn>
         </v-flex>
         <v-card-text>
-          <PrismEditor class="NoBoxShadow" readonly :code="SourceCode" language="vue"></PrismEditor>
+          <PrismEditor
+            class="NoBoxShadow"
+            readonly
+            :code="SourceCode"
+            language="vue"
+          ></PrismEditor>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -165,7 +177,7 @@
 </template>
 
 <script>
-import PrismEditor from "vue-prism-editor"
+import PrismEditor from "vue-prism-editor";
 export default {
   components: {
     PrismEditor
@@ -184,19 +196,19 @@ export default {
   methods: {
     Validate() {
       if (this.$refs.Form.validate()) {
-        this.snackbar = true
+        this.snackbar = true;
       }
     },
 
     Reset() {
-      this.$refs.Form.reset()
+      this.$refs.Form.reset();
     },
 
     Rules(Field) {
-      let RulesArray = []
+      let RulesArray = [];
 
       if (Field.FieldRequired) {
-        RulesArray.push(v => !!v || Field.Label + " is required")
+        RulesArray.push(v => !!v || Field.Label + " is required");
       }
 
       if (Field.Counter > 0) {
@@ -205,7 +217,7 @@ export default {
             v =>
               v.length <= Field.Counter ||
               "Max " + Field.Counter + " characters"
-          )
+          );
         }
       }
 
@@ -215,39 +227,38 @@ export default {
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
               v
             ) || "E-mail must be valid"
-        )
+        );
       }
 
       if (Field.Rules == "Password") {
         if (Field.DefaultVal) {
-          RulesArray.push(v => v.length >= 8 || "Min 8 characters")
+          RulesArray.push(v => v.length >= 8 || "Min 8 characters");
         }
       }
-      return RulesArray
+      return RulesArray;
     },
 
     CodeSyntaxRules(Field, Index, Label) {
-      let RulesArray = []
+      let RulesArray = [];
 
       if (Field.FieldRequired) {
-        RulesArray.push('v => !!v || "Field is required"')
+        RulesArray.push('v => !!v || "Field is required"');
       }
 
       if (Field.Counter > 0) {
         RulesArray.push(
           `v => v.length <= Field.Counter || "Max  characters"
         `
-        )
+        );
       }
-      return RulesArray.toString()
+      return RulesArray.toString();
     },
     Clipboard() {
-      this.Dialog = true
+      this.Dialog = true;
 
-      let Ref = this.$refs.Syntax.innerHTML
+      let Ref = this.$refs.Syntax.innerHTML;
 
-      this.SourceCode = this.DecodeHTMLEntities(Ref)
-
+      this.SourceCode = this.DecodeHTMLEntities(Ref);
     },
     DecodeHTMLEntities(text) {
       var entities = [
@@ -261,34 +272,34 @@ export default {
         ["gt", ">"],
         ["nbsp", " "],
         ["quot", '"']
-      ]
+      ];
 
       for (var i = 0, max = entities.length; i < max; ++i)
         text = text.replace(
           new RegExp("&" + entities[i][0] + ";", "g"),
           entities[i][1]
-        )
+        );
       return text
         .replace(/<\/?span[^>]*>/g, "")
         .replace(/<\!--.*?-->/g, "")
-        .replace(/^\s*[\r\n]/gm, "")
+        .replace(/^\s*[\r\n]/gm, "");
     },
-    CopyToClipboard(){
-       this.$clipboard(this.SourceCode)
-       this.Snackbar = true
+    CopyToClipboard() {
+      this.$clipboard(this.SourceCode);
+      this.Snackbar = true;
     }
   },
 
   mounted() {
     this.$root.$on("TextField", data => {
-      this.Fields = data
-    })
+      this.Fields = data;
+    });
 
     this.$root.$on("FormSettings", data => {
-      this.FormSettings = data
-    })
+      this.FormSettings = data;
+    });
   }
-}
+};
 </script>
 
 <style>
