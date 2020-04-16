@@ -14,7 +14,7 @@
           Close
         </v-btn>
       </v-snackbar>
-      <v-form ref="Form">
+      <v-form lazy-validation v-model="Valid" ref="Form">
         <v-container class="text-center">
           <v-flex v-for="(Field, index) in Fields" :key="index">
             <v-text-field
@@ -89,7 +89,7 @@
       ref="Syntax"
       class="CodeBackground"
     ><span ref="CodeSyntax1">&lt;template&gt;
-    &lt;v-form ref=&quot;Form&quot;&gt; 
+    &lt;v-form lazy-validation v-model="Valid" ref=&quot;Form&quot;&gt; 
         &lt;v-container class=&quot;text-center&quot;&gt;</span>
         <span v-for="(Field, index) in Fields" :key="index"> 
           <span ref="CodeSyntax2" v-if="Field.Type === 'TextField' && Field.Rules !== 'Password'">&lt;v-text-field
@@ -129,6 +129,7 @@
 &lt;script&gt;
   export default { 
     data: () =&gt; ({
+      Valid: true,
       <span v-for="(Field, ModalIndex) in Fields" :key="ModalIndex + 'Modal'">Field_{{ModalIndex+1}}: '',{{ModalIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
       <span v-for="(Field, RulesIndex) in Fields" :key="RulesIndex + 'Rules'">Rule_{{RulesIndex+1}}: [{{Field.FieldRequired === true ? 'v => !!v || "' + Fields[RulesIndex].Label + ' is required",' : null}} {{Field.Counter > 0 ? 'v => v.length <= '+Fields[RulesIndex].Counter+ ' || "Max ' +Fields[RulesIndex].Counter+ ' characters",' : null }} {{Field.Rules === 'Email' ? `v => /^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/.test(v) || "Email must be valid",` : null}} {{Field.Rules === 'Password' ? 'v => v.length >= 8 || "Min 8 characters"' : null }}],{{RulesIndex !== Fields.length -1 ? '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span>
       <span v-for="(Field, PassToggleIndex) in Fields" :key="PassToggleIndex + 'PasswordProperty'"><span v-if="Field.Rules === 'Password'">TogglePass_{{PassToggleIndex+1}}: false{{PassToggleIndex  !== Fields.length - 1 ? ',\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' : null }}</span></span>
@@ -247,7 +248,7 @@ export default {
 
       if (Field.Counter > 0) {
         RulesArray.push(
-          `v => v.length <= Field.Counter || "Max  characters"
+          `v => v.length <= Field.Counter || "Max characters"
         `
         );
       }
